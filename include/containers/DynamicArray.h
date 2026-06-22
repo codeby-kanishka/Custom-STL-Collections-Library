@@ -57,6 +57,29 @@ public:
         }
     }
 
+    // Size Constructor
+
+DynamicArray(int size) {
+
+
+    currentSize = size;
+
+    currentCapacity = size;
+
+
+    data = new T[currentCapacity];
+
+
+    for(int i = 0; i < currentSize; i++) {
+
+
+        data[i] = T();
+
+
+    }
+
+
+}
     ~DynamicArray() {
 
         delete[] data;
