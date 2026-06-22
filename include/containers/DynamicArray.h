@@ -2,7 +2,7 @@
 #define CTL_DYNAMIC_ARRAY_H
 
 
-#include "../core/Exceptions.h"
+#include "../core/Exception.h"
 
 
 namespace ctl {
@@ -62,3 +62,6 @@ public:
         delete[] data;
 
     }
+  };
+  }
+  #endif
