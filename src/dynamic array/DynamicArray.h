@@ -84,7 +84,36 @@ DynamicArray(int size, const T& value) {
             new(&arr[i]) T(other.arr[i]);
         }
     }
+DynamicArray<T>& operator=(const DynamicArray<T>& other) {
 
+    // self assignment check
+    if(this == &other) {
+        return *this;
+    }
+
+
+    // destroy old objects
+    for(int i = 0; i < currentSize; i++) {
+        arr[i].~T();
+    }
+
+    // free old memory
+    free(arr);
+
+
+    // copy new data
+    currentSize = other.currentSize;
+    currentCapacity = other.currentCapacity;
+
+    arr = (T*)malloc(sizeof(T) * currentCapacity);
+
+    for(int i = 0; i < currentSize; i++) {
+        new(&arr[i]) T(other.arr[i]);
+    }
+
+
+    return *this;
+}
      ~DynamicArray() {
         clear();
         free(arr);

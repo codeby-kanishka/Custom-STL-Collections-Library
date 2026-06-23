@@ -69,3 +69,6 @@ Initial memory allocation approach worked for primitive data types, but handling
 
 ### Outcome:
 Successfully implemented DynamicArray with manual memory management that supports primitive types as well as objects like strings.
+
+## Session 4
+
