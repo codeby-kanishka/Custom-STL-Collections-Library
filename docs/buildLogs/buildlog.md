@@ -145,7 +145,7 @@ Improved end insertion performance from O(n) to O(1) by maintaining a tail point
 
 ---
 
-## Date: June 23, 2026
+## Date: June 24, 2026
 **Duration:** 45 minutes
 
 ### Goal:
@@ -163,3 +163,28 @@ Existing LinkedList implementation supported insertion at the front and end, but
 
 ### Outcome:
 Successfully added index based insertion support in Singly LinkedList while maintaining proper memory handling and optimized insertion cases.
+
+---
+
+## Date: June 24
+## Duration: 90 minutes
+
+### Goal:
+Add hash functions and update existing structures for HashMap implementation.
+
+### Problem Encountered:
+HashMap needed a way to convert different key types into hash values.
+Existing DynamicArray and LinkedList also needed small changes to work with HashMap buckets.
+
+### What I Tried:
+Created a generic HashFunction class.
+Added hash functions for int, char, float, double, and string.
+Added a default hash function for custom user-defined objects.
+
+Updated DynamicArray by adding a parameterized constructor to create bucket storage.
+
+Updated SingleLinkedList by adding get(index) method to access and update stored values.
+
+### Outcome:
+Hash functions were successfully implemented.
+DynamicArray and LinkedList are now ready to support HashMap implementation.

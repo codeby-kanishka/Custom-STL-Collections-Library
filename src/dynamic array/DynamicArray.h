@@ -91,6 +91,30 @@ DynamicArray(int size, const T& value) {
             new(&arr[i]) T(value);
         }
 }
+
+DynamicArray(int capacityValue) {
+
+
+    currentSize = capacityValue;
+
+    currentCapacity = capacityValue;
+
+
+    arr = (T*)malloc(sizeof(T) * currentCapacity);
+
+
+    if(!arr)
+        throw std::bad_alloc();
+
+
+
+    for(int i = 0; i < currentSize; i++) {
+
+        new(&arr[i]) T();
+
+    }
+
+}
 // COPY CONSTRUCTOR
 
 DynamicArray(const DynamicArray& other) {
@@ -237,12 +261,7 @@ DynamicArray<T>& operator=(const DynamicArray<T>& other) {
     return arr[index];
 }
 
-    //    const T& get(int index) const{
-    //     if(index < 0 || index >= currentSize)
-    //         throw std::out_of_range("Invalid index");
-
-    //     return arr[index];
-    // }
+   
 
 
     //utility methods
