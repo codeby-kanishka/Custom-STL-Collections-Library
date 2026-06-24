@@ -138,3 +138,28 @@ While implementing copy constructor and insertion logic, adding elements at the 
 
 ### Outcome:
 Improved end insertion performance from O(n) to O(1) by maintaining a tail pointer, while keeping proper memory management and LinkedList functionality.
+
+## Session 7
+**Duration:** 30 minutes
+
+
+---
+
+## Date: June 23, 2026
+**Duration:** 45 minutes
+
+### Goal:
+Extend Singly LinkedList insertion functionality.
+
+### Problem Encountered:
+Existing LinkedList implementation supported insertion at the front and end, but required support for inserting elements at a specific position.
+
+### What I Tried:
+- Implemented insertAt method for index based insertion.
+- Added boundary checks for invalid index values.
+- Handled edge cases like inserting at the beginning and end of the list.
+- Reused existing insertion logic where possible.
+- Updated pointer connections carefully to maintain list structure.
+
+### Outcome:
+Successfully added index based insertion support in Singly LinkedList while maintaining proper memory handling and optimized insertion cases.

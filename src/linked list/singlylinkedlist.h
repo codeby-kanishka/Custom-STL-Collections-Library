@@ -43,16 +43,11 @@ public:
     ~SingleLinkedList() {
 
         Node* current = head;
-
         while(current != nullptr) {
-
             Node* nextNode = current->next;
-
             delete current;
-
             current = nextNode;
         }
-
         head = nullptr;
         tail = nullptr;
         currentSize = 0;
@@ -67,14 +62,9 @@ public:
         tail = nullptr;
         currentSize = 0;
 
-
         Node* current = other.head;
-
-
         while(current != nullptr) {
-
             insertBack(current->data);
-
             current = current->next;
         }
     }
@@ -85,40 +75,24 @@ public:
     SingleLinkedList<T>& operator=(const SingleLinkedList<T>& other) {
 
         if(this == &other) {
-
-            return *this;
+          return *this;
         }
-
-
         Node* current = head;
-
-
         while(current != nullptr) {
-
             Node* nextNode = current->next;
-
             delete current;
-
             current = nextNode;
         }
-
 
         head = nullptr;
         tail = nullptr;
         currentSize = 0;
 
-
-
         current = other.head;
-
-
         while(current != nullptr) {
-
             insertBack(current->data);
-
             current = current->next;
         }
-
 
         return *this;
     }
@@ -147,7 +121,6 @@ public:
         if(head == nullptr) {
             head = tail = newNode;
         }
-
         else {
             tail->next = newNode;
             tail = newNode;
@@ -168,7 +141,30 @@ public:
         }
     }
 
-    void insert(int index, const T& value) {
+    void deleteAt(int index) {
+    if(index < 0 || index >= currentSize) {
+        throw std::out_of_range("Invalid index");
+    }
+    if(index == 0) {
+        deleteFront();
+        return;
+    }
+Node* previous = head;
+  for(int i = 0; i < index - 1; i++) {
+        previous = previous->next;
+    }
+    Node* temp = previous->next;
+    previous->next = temp->next;
+
+    if(temp == tail) {
+        tail = previous;
+    }
+    delete temp;
+    currentSize--;
+}
+
+
+    void insertAt(int index, const T& value) {
         if(index < 0 || index > currentSize) {
             throw std::out_of_range("Invalid index");
         }
@@ -190,10 +186,10 @@ public:
         current->next = newNode;
         currentSize++;
     }
+    
     bool search(const T& value) const {
         Node* current = head;
         while(current != nullptr) {
-
             if(current->data == value) {
                 return true;
             }
@@ -205,6 +201,11 @@ public:
     int size() const {
         return currentSize;
     }
+
+    bool isEmpty() const {
+    return currentSize == 0;
+
+}
 
 
     void print() const {
