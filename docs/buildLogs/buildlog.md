@@ -70,5 +70,71 @@ Initial memory allocation approach worked for primitive data types, but handling
 ### Outcome:
 Successfully implemented DynamicArray with manual memory management that supports primitive types as well as objects like strings.
 
-## Session 4
+## Session 5 
 
+
+---
+
+## Date: June 23, 2026
+**Duration:** 45 minutes
+
+### Goal:
+Add exception handling support for DynamicArray memory operations.
+
+### Problem Encountered:
+Since DynamicArray manages memory manually, allocation failures or errors during object creation needed to be handled safely to avoid memory issues.
+
+### What I Tried:
+- Added checks for memory allocation failure cases.
+- Implemented exception handling during DynamicArray resizing.
+- Added cleanup logic to release already allocated memory if an error occurs.
+- Tested memory handling behavior during allocation and copying operations.
+
+### Outcome:
+Improved DynamicArray reliability by handling memory related failures and ensuring safer resource management.
+
+
+
+## Session 6
+
+---
+## Date: June 24, 2026
+**Duration:** 60 minutes
+
+### Goal:
+Implement the basic structure of a generic Singly Linked List container.
+
+### Problem Encountered:
+Needed to design a node-based data structure that supports different data types while maintaining dynamic memory allocation manually.
+
+### What I Tried:
+- Implemented template-based Singly Linked List class.
+- Created Node structure containing data and next pointer.
+- Added head pointer to maintain the starting node of the list.
+- Implemented basic node creation and linking logic.
+- Added initial insertion and traversal functionality.
+- Managed dynamic node allocation and cleanup.
+
+### Outcome:
+Successfully created the basic structure of a generic Singly Linked List with template support, node-based memory layout and manual memory management.
+
+---
+
+## Date: June 24, 2026
+**Duration:** 30 minutes
+
+### Goal:
+Optimize insertion operations in Singly LinkedList.
+
+### Problem Encountered:
+While implementing copy constructor and insertion logic, adding elements at the end required traversing the entire linked list every time, making end insertion take O(n) time.
+
+### What I Tried:
+- Analyzed the insertion process in Singly LinkedList.
+- Added an insertBack function for adding nodes at the end.
+- Introduced a tail pointer to maintain direct access to the last node.
+- Updated insertion and copying logic to use the tail pointer.
+- Handled tail updates during insertion and deletion operations.
+
+### Outcome:
+Improved end insertion performance from O(n) to O(1) by maintaining a tail pointer, while keeping proper memory management and LinkedList functionality.

@@ -26,6 +26,7 @@ private:
         if(!newArr) throw std::bad_alloc();
 
         // copy old objects into new memory
+        
         int i = 0;
         try{
         for(; i < currentSize; i++) {
