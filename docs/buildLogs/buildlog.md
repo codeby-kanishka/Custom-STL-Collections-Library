@@ -188,3 +188,37 @@ Updated SingleLinkedList by adding get(index) method to access and update stored
 ### Outcome:
 Hash functions were successfully implemented.
 DynamicArray and LinkedList are now ready to support HashMap implementation.
+
+---
+
+## Date: June 24
+## Duration: 120 minutes
+
+### Goal:
+Create a generic HashMap data structure.
+
+### Problem Encountered:
+Needed a way to store key-value pairs and handle cases where different keys get the same bucket index.
+
+### What I Tried:
+Created a template-based HashMap.
+Used DynamicArray to store buckets.
+Used SingleLinkedList in each bucket to handle collisions.
+
+Added methods:
+- set()
+- get()
+- exists()
+- remove()
+- size()
+- loadFactor()
+- isEmpty()
+
+Added resizing when the HashMap becomes too full.
+
+Connected HashMap with HashFunctions so different key types can be used.
+
+### Outcome:
+Successfully created a generic HashMap.
+It can now store, update, search, and remove key-value pairs.
+It supports primitive and user-defined data types.
