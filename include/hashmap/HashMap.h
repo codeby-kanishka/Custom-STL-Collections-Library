@@ -55,43 +55,25 @@ private:
 
     int currentSize;
 
-
     int bucketCount;
-
-
 
     const float maxLoad = 0.75f;
 
 
 
 
-    int getIndex(
-        const K& key
-    );
-
-
+    int getIndex( const K& key);
 
     void resize();
 
-
-
-
 public:
-
-
-
     // CONSTRUCTOR
 
     HashMap();
-
-
     // Copy Constructor
     HashMap(const HashMap<K,V>& other);
-
-
     // Destructor
     ~HashMap();
-
 
     // Assignment Operator
     HashMap<K,V>& operator=(
@@ -101,65 +83,20 @@ public:
 
     // INSERT / UPDATE
 
-    void set(
-        const K& key,
-        const V& value
-    );
+    void set(  const K& key, const V& value );
 
+     V& get(const K& key);
+ // SEARCH KEY
 
+    bool exists( const K& key);
 
-
-
-    // GET VALUE
-
-    V& get(
-        const K& key
-    );
-
-
-
-
-
-    // SEARCH KEY
-
-    bool exists(
-        const K& key
-    );
-
-
-
-
-
-    // DELETE KEY
-
-    void remove(
-        const K& key
-    );
-
-
-
-
-
-    // NUMBER OF ELEMENTS
+    void remove(const K& key);
 
     int size();
 
-
-
-
-
-    // CURRENT LOAD
-
     float loadFactor();
 
-
-
-
-
-    // EMPTY CHECK
-
     bool isEmpty();
-
 
 
 };
@@ -167,8 +104,6 @@ public:
 
 
 // template implementation include
-#include "../../src/HashMap.tpp"
-
-
+#include "../../src/HashMap/HashMap.tpp"
 
 #endif

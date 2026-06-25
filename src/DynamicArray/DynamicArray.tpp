@@ -119,7 +119,6 @@ DynamicArray<T>::DynamicArray(int capacityValue) {
 
 
     currentSize = capacityValue;
-
     currentCapacity = capacityValue;
 
 
@@ -142,9 +141,7 @@ DynamicArray<T>::DynamicArray(int capacityValue) {
 // COPY CONSTRUCTOR
 
 template<typename T>
-DynamicArray<T>::DynamicArray(
-    const DynamicArray<T>& other
-) {
+DynamicArray<T>::DynamicArray(const DynamicArray<T>& other) {
 
     currentSize = other.currentSize;
     currentCapacity = other.currentCapacity;
@@ -295,42 +292,25 @@ void DynamicArray<T>::append(const T& value) {
 
 
 
+
 // INSERT
 
 template<typename T>
-void DynamicArray<T>::insert(
-    int index,
-    const T& value
-) {
-
+void DynamicArray<T>::insert(int index,const T& value) {
 
     if(index < 0 || index > currentSize)
-
         throw std::out_of_range("Invalid index");
 
-
-
     if(currentSize == currentCapacity)
-
         resize();
 
 
-
     for(int i = currentSize; i > index; i--) {
-
-
         new(&arr[i]) T(arr[i-1]);
-
-
         arr[i-1].~T();
 
     }
-
-
-
     new(&arr[index]) T(value);
-
-
     currentSize++;
 
 }
@@ -344,25 +324,15 @@ void DynamicArray<T>::remove(int index) {
 
 
     if(index < 0 || index >= currentSize)
-
         throw std::out_of_range("Invalid index");
-
-
 
     arr[index].~T();
 
-
-
     for(int i = index; i < currentSize - 1; i++) {
-
-
         new(&arr[i]) T(arr[i+1]);
-
-
         arr[i+1].~T();
 
     }
-
 
     currentSize--;
 
@@ -376,19 +346,34 @@ void DynamicArray<T>::remove(int index) {
 template<typename T>
 T& DynamicArray<T>::get(int index) {
 
-
     if(index < 0 || index >= currentSize)
 
         throw std::out_of_range("Invalid index");
-
 
 
     return arr[index];
 
 }
 
+template<typename T>
+const T& DynamicArray<T>::get(int index) const {
 
+    if(index < 0 || index >= currentSize)
+        throw std::out_of_range("Index out of range");
 
+    return arr[index];
+
+}
+
+template<typename T>
+void DynamicArray<T>::set(int index, const T& value) {
+
+    if(index < 0 || index >= currentSize)
+        throw std::out_of_range("Index out of range");
+
+    arr[index] = value;
+
+}
 
 // SIZE
 

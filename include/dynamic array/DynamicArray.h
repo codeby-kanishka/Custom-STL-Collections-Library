@@ -35,6 +35,7 @@ public:
 
     // methods
 
+
     void append(const T& value);
 
     void insert(int index,const T& value);
@@ -42,6 +43,10 @@ public:
     void remove(int index);
 
     T& get(int index);
+
+   void set(int index, const T& value);
+
+    const T& get(int index) const;
 
 
     // utility
@@ -55,6 +60,6 @@ public:
 };
 
 
-#include "../src/DynamicArray.tpp"
+#include "../src/DynamicArray/DynamicArray.tpp"
 
 #endif

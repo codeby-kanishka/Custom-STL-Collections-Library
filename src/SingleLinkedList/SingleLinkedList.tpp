@@ -1,7 +1,9 @@
 #ifndef SINGLE_LINKED_LIST_TPP
 #define SINGLE_LINKED_LIST_TPP
 
-
+#ifndef SINGLE_LINKED_LIST_H
+#include "../include/linked list/SingleLinkedList.h"
+#endif
 
 // NODE CONSTRUCTOR
 
@@ -107,57 +109,24 @@ SingleLinkedList<T>&
 SingleLinkedList<T>::operator=(
     const SingleLinkedList<T>& other
 ) {
-
-
     if(this == &other)
-
         return *this;
-
-
-
     Node* current = head;
-
-
-
     while(current != nullptr) {
-
-
         Node* nextNode = current->next;
-
-
         delete current;
-
-
         current = nextNode;
 
     }
-
-
-
     head = nullptr;
-
     tail = nullptr;
-
     currentSize = 0;
-
-
-
     current = other.head;
-
-
-
     while(current != nullptr) {
-
-
         insertBack(current->data);
-
-
         current = current->next;
 
     }
-
-
-
     return *this;
 
 }
@@ -171,37 +140,19 @@ template<typename T>
 void SingleLinkedList<T>::insertFront(
     const T& value
 ) {
-
-
     Node* newNode = new Node(value);
-
-
-
     if(head == nullptr) {
-
-
-        head = tail = newNode;
+      head = tail = newNode;
 
     }
 
     else {
-
-
         newNode->next = head;
-
-
         head = newNode;
 
     }
-
-
-
     currentSize++;
-
 }
-
-
-
 
 // INSERT BACK
 
@@ -209,34 +160,18 @@ template<typename T>
 void SingleLinkedList<T>::insertBack(
     const T& value
 ) {
-
-
-    Node* newNode = new Node(value);
-
-
+  Node* newNode = new Node(value);
 
     if(head == nullptr) {
-
-
         head = tail = newNode;
-
     }
 
-
     else {
-
-
         tail->next = newNode;
-
-
         tail = newNode;
 
     }
-
-
-
     currentSize++;
-
 }
 
 
@@ -247,45 +182,26 @@ void SingleLinkedList<T>::insertBack(
 template<typename T>
 void SingleLinkedList<T>::deleteFront() {
 
-
     if(head == nullptr)
 
         throw std::runtime_error(
             "LinkedList is empty"
         );
 
-
-
     Node* temp = head;
 
-
-
     head = head->next;
-
-
-
     delete temp;
-
-
-
     currentSize--;
 
-
-
     if(currentSize == 0)
-
         tail = nullptr;
 
 }
-
-
-
-
 // DELETE AT
 
 template<typename T>
 void SingleLinkedList<T>::deleteAt(int index) {
-
 
     if(index < 0 || index >= currentSize)
 
@@ -293,48 +209,26 @@ void SingleLinkedList<T>::deleteAt(int index) {
             "Invalid index"
         );
 
-
-
     if(index == 0) {
-
-
         deleteFront();
-
-
         return;
 
     }
-
-
-
     Node* previous = head;
-
-
 
     for(int i=0; i<index-1; i++)
 
         previous = previous->next;
 
-
-
-
     Node* temp = previous->next;
 
-
-
     previous->next = temp->next;
-
-
 
     if(temp == tail)
 
         tail = previous;
 
-
-
     delete temp;
-
-
 
     currentSize--;
 
