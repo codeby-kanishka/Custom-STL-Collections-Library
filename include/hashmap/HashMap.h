@@ -1,17 +1,16 @@
-
 #ifndef HASH_MAP_H
 #define HASH_MAP_H
 
 
-#include "DynamicArray.h"
-#include "singlylinkedlist.h"
+#include "../dynamic array/DynamicArray.h"
+#include "../linked list/SingleLinkedList.h"
 #include "HashFunctions.h"
 
 #include <stdexcept>
 
 
-template<typename K, typename V>
 
+template<typename K, typename V>
 class HashMap {
 
 
@@ -19,152 +18,157 @@ private:
 
 
     struct Data {
+
+
         K key;
+
         V value;
 
+
+
         Data() {
+
         }
 
-        Data(const K& k, const V& v) {
+
+
+        Data(
+            const K& k,
+            const V& v
+        ) {
+
             key = k;
+
             value = v;
+
         }
 
     };
 
-    DynamicArray<SingleLinkedList<Data>> buckets;
+
+
+    DynamicArray<
+        SingleLinkedList<Data>
+    > buckets;
+
 
 
     int currentSize;
+
+
     int bucketCount;
 
-    const float maxLoad = 0.75;
-
-    int getIndex(const K& key) {
-
-        unsigned long hashValue =
-            HashFunction<K>::hash(key);
-
-        return hashValue % bucketCount;
-
-    }
-
-    void resize() {
-
-        DynamicArray<SingleLinkedList<Data>> oldBuckets =
-            buckets;
-
-        int oldBucketCount = bucketCount;
-        bucketCount *= 2;
 
 
-  buckets = DynamicArray<SingleLinkedList<Data>>(bucketCount);
-       currentSize = 0;
+    const float maxLoad = 0.75f;
 
-        for(int i = 0; i < oldBucketCount; i++) {
-    SingleLinkedList<Data>& list =oldBuckets.get(i);
-            for(int j = 0; j < list.size(); j++) {
-                Data data = list.get(j);
-                set(data.key, data.value);
 
-            }
-        }
-    }
+
+
+    int getIndex(
+        const K& key
+    );
+
+
+
+    void resize();
+
+
+
 
 public:
 
-    HashMap() {
 
-        bucketCount = 8;
-        currentSize = 0;
 
-        buckets = DynamicArray<SingleLinkedList<Data>>(bucketCount);
+    // CONSTRUCTOR
 
-    }
+    HashMap();
 
-  
 
-    void set(const K& key, const V& value) {
-        if(loadFactor() >= maxLoad) {
-            resize();
-        }
-int index = getIndex(key);
-SingleLinkedList<Data>& list = buckets.get(index);
+    // Copy Constructor
+    HashMap(const HashMap<K,V>& other);
 
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).key == key) {
-                list.get(i).value = value;
-                return;
-            }
-        }
 
-        Data newData(key, value);
-        list.insertBack(newData);
-        currentSize++;
+    // Destructor
+    ~HashMap();
 
-    }
+
+    // Assignment Operator
+    HashMap<K,V>& operator=(
+        const HashMap<K,V>& other
+    );
+
+
+    // INSERT / UPDATE
+
+    void set(
+        const K& key,
+        const V& value
+    );
+
+
+
+
 
     // GET VALUE
-    // Average O(1), Worst O(n)
 
-    V& get(const K& key) {
+    V& get(
+        const K& key
+    );
 
-        int index = getIndex(key);
-SingleLinkedList<Data>& list = buckets.get(index);
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).key == key) {
-                return list.get(i).value;
 
-            }
-        }
 
-        throw std::runtime_error("Key not found");
-    }
 
-    // CHECK KEY EXISTS
 
-    bool exists(const K& key) {
-        int index = getIndex(key);
-        SingleLinkedList<Data>& list = buckets.get(index);
+    // SEARCH KEY
 
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).key == key) {
-                return true;
+    bool exists(
+        const K& key
+    );
 
-            }
-        }
-        return false;
 
-    }
 
-   void remove(const K& key) {
-        int index = getIndex(key);
- SingleLinkedList<Data>& list = buckets.get(index);
-        for(int i = 0; i < list.size(); i++) {
-            if(list.get(i).key == key) {
-                list.deleteAt(i);
-                currentSize--;
-                return;
-            }
-        }
-        throw std::runtime_error("Key not found");
-    }
+
+
+    // DELETE KEY
+
+    void remove(
+        const K& key
+    );
+
+
+
+
+
     // NUMBER OF ELEMENTS
 
-    int size() {
-        return currentSize;
-    }
-
-    float loadFactor() {
-        return (float)currentSize / bucketCount;
-
-    }
+    int size();
 
 
-    bool isEmpty() {
-        return currentSize == 0;
-    }
+
+
+
+    // CURRENT LOAD
+
+    float loadFactor();
+
+
+
+
+
+    // EMPTY CHECK
+
+    bool isEmpty();
+
+
 
 };
+
+
+
+// template implementation include
+#include "../../src/HashMap.tpp"
+
+
 
 #endif
