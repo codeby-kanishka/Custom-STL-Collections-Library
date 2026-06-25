@@ -32,8 +32,6 @@ private:
 
     };
 
-
-
     DynamicArray<SingleLinkedList<Data>> buckets;
 
 
@@ -79,13 +77,12 @@ public:
 
         bucketCount = 8;
         currentSize = 0;
-        buckets =
-            DynamicArray<SingleLinkedList<Data>>(bucketCount);
+
+        buckets = DynamicArray<SingleLinkedList<Data>>(bucketCount);
 
     }
 
-    // INSERT / UPDATE
-    // Average O(1), Worst O(n)
+  
 
     void set(const K& key, const V& value) {
         if(loadFactor() >= maxLoad) {
@@ -113,8 +110,7 @@ SingleLinkedList<Data>& list = buckets.get(index);
     V& get(const K& key) {
 
         int index = getIndex(key);
-        SingleLinkedList<Data>& list =
-            buckets.get(index);
+SingleLinkedList<Data>& list = buckets.get(index);
         for(int i = 0; i < list.size(); i++) {
             if(list.get(i).key == key) {
                 return list.get(i).value;
@@ -152,7 +148,6 @@ SingleLinkedList<Data>& list = buckets.get(index);
             }
         }
         throw std::runtime_error("Key not found");
-
     }
     // NUMBER OF ELEMENTS
 
