@@ -22,13 +22,13 @@ containers with manual memory management and optimized performance strategies.
 - Build reusable containers using C++ templates
 - Implement efficient memory management
 - Maintain optimized time complexity
-- Support extensible container design
+
 
 ---
 
 ## Template Design
 
-Templates allow containers to support multiple data types using a single implementation while maintaining compile-time type safety.
+Templates were used to make the data structures work with different data types. Without templates, the same code would need to be written separately for int, string, and other types, which would increase code duplication.
 
 Example:
 
@@ -43,37 +43,6 @@ HashMap<string, int> data;
 
 ---
 
-# System Architecture Overview
-
-The Custom Template Library follows a modular layered architecture.
-
-```
-                 Custom Template Library (CTL)
-
-                         Public API Layer
-                insert(), remove(), get(), search()
-
-                              |
-                              |
-
-                      Container Layer
-
-        DynamicArray<T>     LinkedList<T>     HashMap<K,V>
-
-              |                  |                  |
-
-        Contiguous          Node Based          Bucket Based
-        Memory              Allocation          Storage
-
-
-                    Memory Management Layer
-
-              Constructor / Destructor
-              Deep Copy (Rule Of Three)
-              Resource Cleanup
-```
-
----
 
 # DynamicArray<T>
 
@@ -104,9 +73,9 @@ It automatically increases capacity at runtime when more storage is required.
 
 | Method | Average | Worst | Reason |
 |-|-|-|-|
-| append(value) | O(1) | O(n) | Resize may occur |
+| append(value) | O(1) | O(n) | Usually adds the element at the end; worst case occurs when internal resizing is required. |
 | insert(index,value) | O(n) | O(n) | Elements require shifting |
-| remove(index) | O(n) | O(n) | Maintains order after deletion |
+| remove(index) | O(n) | O(n) | Elements after the removed index are shifted. |
 | get(index) | O(1) | O(1) | Direct index access |
 | set(index,value) | O(1) | O(1) | Direct modification |
 | size() | O(1) | O(1) | Stored variable returned |
@@ -249,7 +218,7 @@ The Node remains private inside LinkedList to protect internal implementation.
 
 ---
 
-# HashMap<K,V,Hash>
+# HashMap
 
 ## Overview
 
@@ -288,6 +257,7 @@ using hashing.
 | remove(key) | O(1) | O(n) | Removes from bucket |
 | size() | O(1) | O(1) | Stored count |
 | loadFactor() | O(1) | O(1) | Calculates usage |
+| isEmpty() | O(1) | O(1) | checks for directy stored size variable
 
 ---
 
@@ -300,6 +270,10 @@ HashMap<Key, Value, Hash>
 ```
 
 Supports:
+
+## Default Hash Function
+
+A generic byte-based default hash function is implemented to support template keys. It converts the key's memory representation into bytes and combines them using a polynomial hash approach with prime multiplier 31. The final hash value is mapped to a bucket index using modulo operation. Specialized hash functions can be added for complex data types to improve hashing behavior.
 
 ### Primitive Types
 
@@ -315,9 +289,7 @@ index = hash(key) % capacity;
 
 Characters are processed to generate a numeric hash.
 
-### User Defined Objects
 
-Users can provide custom hash functions.
 
 ---
 
